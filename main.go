@@ -9,18 +9,8 @@ import (
 	"os/user"
 	"strings"
 
-	"github.com/charmbracelet/lipgloss"
+	lipgloss_styles "github.com/aditya-sutar-45/gosh/lipgloss_styles"
 )
-
-var dirStyle = lipgloss.NewStyle().
-	Bold(true).
-	Foreground(lipgloss.Color("#FAFAFA")).
-	Background(lipgloss.Color("#7D56F4")).
-	MarginRight(1)
-
-var usernameStyle = lipgloss.NewStyle().
-	Bold(false).
-	Foreground(lipgloss.Color("#9c7ef7"))
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
@@ -36,13 +26,7 @@ func main() {
 		}
 
 		// for vanity purposes
-		// fmt.Printf("%s\n %s > ", dir, currentUser.Username)
-		usernameString := fmt.Sprintf("%s > ", currentUser.Username)
-
-		usernameRender := usernameStyle.Render(usernameString)
-		dirRender := dirStyle.Render(dir)
-
-		fmt.Println(dirRender + usernameRender)
+		lipgloss_styles.RenderHeader(dir, currentUser.Username)
 
 		// read input from keyboard
 		inp, err := reader.ReadString('\n')
